@@ -13,20 +13,29 @@ class AutoLayoutViewController: UIViewController {
     weak var square: UIView!
     
     let button = UIButton(type: .custom)
-
+    let textfield = UITextField(frame: .zero)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textfield.borderStyle = .roundedRect
+        
+        let margins = view.layoutMarginsGuide
+
+        
         button.setTitle("Submit", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.black, for: .normal)
         
         //        https://stackoverflow.com/questions/47800210/when-should-translatesautoresizingmaskintoconstraints-be-set-to-true
         
         // this line messsed with me for a bit
         button.translatesAutoresizingMaskIntoConstraints = false
+        textfield.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(button)
-        view.backgroundColor = .gray
+        view.addSubview(textfield)
+
+        view.backgroundColor = .white
         
         let constraintWidth = NSLayoutConstraint(item: button,
                                                  attribute: .width,
@@ -55,10 +64,45 @@ class AutoLayoutViewController: UIViewController {
         view.addConstraint(constraintWidth)
         view.addConstraint(constraintX)
         view.addConstraint(constraintY)
+        
+        let constraintXTextField = NSLayoutConstraint(item: textfield,
+                                             attribute: .centerX,
+                                             relatedBy: .equal,
+                                             toItem: view,
+                                             attribute: .centerX,
+                                             multiplier: 1.0,
+                                             constant: 0.0)
+        
+        let constraintHeight = NSLayoutConstraint(item: textfield,
+                                                 attribute: .height,
+                                                 relatedBy: .equal,
+                                                 toItem: nil,
+                                                 attribute: .notAnAttribute,
+                                                 multiplier: 1.0,
+                                                 constant: 100.0)
+        
+        let constraintWidthTextField = NSLayoutConstraint(item: textfield,
+                                                 attribute: .width,
+                                                 relatedBy: .equal,
+                                                 toItem: nil,
+                                                 attribute: .notAnAttribute,
+                                                 multiplier: 1.0,
+                                                 constant: 200.0)
+        
+        let constraintTop = NSLayoutConstraint(item: textfield, attribute: .bottom, relatedBy: .equal, toItem: button, attribute: .top, multiplier: 1.0, constant: 0.0)
+
+        
+        textfield.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+
+        textfield.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        
+        constraintTop.isActive = true
+        constraintXTextField.isActive = true
+        constraintHeight.isActive = true
+        constraintWidthTextField.isActive = true
 
         
         // Get the superview's layout
-//        let margins = view.layoutMarginsGuide
         
 //        let square = UIView()
 //        self.view.addSubview(square)
