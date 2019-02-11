@@ -24,7 +24,7 @@ class AutoLayoutViewController: UIViewController {
 
         
         button.setTitle("Submit", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         
         //        https://stackoverflow.com/questions/47800210/when-should-translatesautoresizingmaskintoconstraints-be-set-to-true
         
@@ -35,7 +35,7 @@ class AutoLayoutViewController: UIViewController {
         view.addSubview(button)
         view.addSubview(textfield)
 
-        view.backgroundColor = .white
+        view.backgroundColor = .gray
         
         let constraintWidth = NSLayoutConstraint(item: button,
                                                  attribute: .width,
